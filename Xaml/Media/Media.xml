@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DependencyObjectNamespace>
+  <Name>System.Windows.Media</Name>
+  <DependencyObject>
+    <Name>Brush</Name>
+    <DependencyProperty>
+      <Name>Target</Name>
+      <Type>BrushTarget</Type>
+      <DefaultValue>BrushTarget.Geometry</DefaultValue>
+      <Flags>AffectsVisual</Flags>
+    </DependencyProperty>
+  </DependencyObject>
+  <DependencyObject>
+    <Name>SolidColorBrush</Name>
+    <DependencyProperty>
+      <Name>Color</Name>
+      <Type>Color</Type>
+      <DefaultValue>new Color(255, 255, 255, 255)</DefaultValue>
+      <Flags>AffectsVisual</Flags>
+    </DependencyProperty>
+  </DependencyObject>
+</DependencyObjectNamespace>

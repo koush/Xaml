@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenGLES", "OpenGLES\OpenGLES.csproj", "{EF70FB24-4CF9-4C2D-87AB-418FD0F75A5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xaml", "Xaml\Xaml.csproj", "{B0F3D819-EE09-4DEC-B0BF-CE18756FE2DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamlTest", "XamlTest\XamlTest.csproj", "{DA2E58DD-0825-42FC-A674-098B43E06F7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyObjectCodeGenerator", "DependencyObjectCodeGenerator\DependencyObjectCodeGenerator.csproj", "{DC56338A-72A9-4D80-9C03-957124B678E5}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://koushik-tfs:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = OpenGLES\\OpenGLES.csproj
+		SccProjectName1 = OpenGLES
+		SccLocalPath1 = OpenGLES
+		SccProjectUniqueName2 = Xaml\\Xaml.csproj
+		SccProjectName2 = Xaml
+		SccLocalPath2 = Xaml
+		SccProjectUniqueName3 = XamlTest\\XamlTest.csproj
+		SccProjectName3 = XamlTest
+		SccLocalPath3 = XamlTest
+		SccProjectUniqueName4 = DependencyObjectCodeGenerator\\DependencyObjectCodeGenerator.csproj
+		SccProjectName4 = DependencyObjectCodeGenerator
+		SccLocalPath4 = DependencyObjectCodeGenerator
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EF70FB24-4CF9-4C2D-87AB-418FD0F75A5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF70FB24-4CF9-4C2D-87AB-418FD0F75A5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF70FB24-4CF9-4C2D-87AB-418FD0F75A5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF70FB24-4CF9-4C2D-87AB-418FD0F75A5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0F3D819-EE09-4DEC-B0BF-CE18756FE2DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0F3D819-EE09-4DEC-B0BF-CE18756FE2DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0F3D819-EE09-4DEC-B0BF-CE18756FE2DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0F3D819-EE09-4DEC-B0BF-CE18756FE2DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA2E58DD-0825-42FC-A674-098B43E06F7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA2E58DD-0825-42FC-A674-098B43E06F7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA2E58DD-0825-42FC-A674-098B43E06F7B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{DA2E58DD-0825-42FC-A674-098B43E06F7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA2E58DD-0825-42FC-A674-098B43E06F7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA2E58DD-0825-42FC-A674-098B43E06F7B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{DC56338A-72A9-4D80-9C03-957124B678E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC56338A-72A9-4D80-9C03-957124B678E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC56338A-72A9-4D80-9C03-957124B678E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC56338A-72A9-4D80-9C03-957124B678E5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

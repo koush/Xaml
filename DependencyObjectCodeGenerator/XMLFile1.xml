@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DependencyObjectNamespace>
+  <Name>System.Windows.Controls</Name>
+  <DependencyObject>
+    <Name>Control</Name>
+    <DependencyProperty>
+      <Name>Width</Name>
+      <Type>float</Type>
+      <DefaultValue>float.NaN</DefaultValue>
+      <Flags>AffectsMeasure</Flags>
+    </DependencyProperty>
+  </DependencyObject>
+</DependencyObjectNamespace>
