@@ -1,22 +1,18 @@
 ﻿using System;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.Collections.Generic;
 using System.Text;
 using OpenGLES;
 using System.Reflection;
 using System.IO;
 using System.Runtime.InteropServices;
-using System.Windows.Media.Interop;
-
-using GDISize = System.Drawing.Size;
+//using System.Windows.Media.Interop;
 
 namespace System.Windows.Media
 {
     public enum PixelFormat
     {
-        Rgb565 = PixelFormatID.PixelFormat16bppRGB565,
-        Bgra32 = PixelFormatID.PixelFormat32bppARGB,
+        Rgb565 = 0,//PixelFormatID.PixelFormat16bppRGB565,
+        Bgra32 = 1,//PixelFormatID.PixelFormat32bppARGB,
     }
 
     // Summary:
@@ -74,7 +70,9 @@ namespace System.Windows.Media
             return minDim;
         }
 
+        /*
         static IImagingFactory myImagingFactory = Activator.CreateInstance(Type.GetTypeFromCLSID(new Guid("327ABDA8-072B-11D3-9D7B-0000F81EF32E"))) as IImagingFactory;
+        */
 
         unsafe static void ConvertToRGBA(byte[] pixels, int width, int height)
         {
@@ -99,6 +97,7 @@ namespace System.Windows.Media
             }
         }
 
+        /*
         unsafe IBitmapImage GetSquareBitmap(int squareDim, IntPtr pixelPointer, PixelFormat pixelFormat)
         {
             IBitmapImage bitmap = null;
@@ -116,6 +115,7 @@ namespace System.Windows.Media
             Marshal.FinalReleaseComObject(image);
             return other;
         }
+        */
 
         // Create assumes that the contents are ready to be loaded into opengl--
         // the dimensions are square, and it is in rgba
@@ -175,6 +175,7 @@ namespace System.Windows.Media
                 height = GetValidTextureDimensionFromSize(height);
                 int squareDim = Math.Max(width, height);
 
+                /*
                 IBitmapImage bitmap = null;
                 BitmapImageData data = new BitmapImageData();
                 if (squareDim != ret.myWidth || squareDim != ret.myHeight)
@@ -193,6 +194,7 @@ namespace System.Windows.Media
 
                 if (data.Scan0 != IntPtr.Zero)
                     bitmap.UnlockBits(ref data);
+                */
             }
 
             return ret;
@@ -208,6 +210,8 @@ namespace System.Windows.Media
 
         unsafe public static BitmapSource Create(Stream bitmapStream)
         {
+            return null;
+            /*
             int bytesLength;
             byte[] bytes;
             MemoryStream memStream = bitmapStream as MemoryStream;
@@ -263,6 +267,7 @@ namespace System.Windows.Media
             ret.myHeight = info.Height;
 
             return ret;
+            */
         }
     
         #region IDisposable Members

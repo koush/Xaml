@@ -1,4 +1,5 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -9,10 +10,6 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>System.Windows</RootNamespace>
     <AssemblyName>Xaml</AssemblyName>
-    <ProjectTypeGuids>{4D628B5B-2FBC-4AA6-8C16-197242AEB884};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PlatformFamilyName>PocketPC</PlatformFamilyName>
-    <PlatformID>b2c48bd2-963d-4549-9169-1fa021dce484</PlatformID>
-    <OSVersion>5.2</OSVersion>
     <DeployDirSuffix>Xaml</DeployDirSuffix>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <NativePlatformName>Windows Mobile 6 Professional SDK</NativePlatformName>
@@ -53,20 +50,18 @@
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Reference Include="android, Version=1.0.0.0, Culture=neutral">
+      <Package>android</Package>
+    </Reference>
+    <Reference Include="MonoJavaBridge, Version=1.0.0.0, Culture=neutral">
+      <Package>android</Package>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\ControlCollection.cs" />
     <Compile Include="Controls\Controls.CodeGeneration.cs" />
     <Compile Include="Controls\Image.cs" />
-    <Compile Include="Controls\Label.cs" />
     <Compile Include="Enumerations.cs" />
-    <Compile Include="Application.cs" />
     <Compile Include="Controls\ContentControl.cs" />
     <Compile Include="Controls\Control.cs" />
     <Compile Include="Controls\Orientation.cs" />
@@ -82,14 +77,10 @@
     <Compile Include="Media\Color.cs" />
     <Compile Include="Media\DrawingContext.cs" />
     <Compile Include="Media\DrawingVisual.cs" />
-    <Compile Include="Media\Font.cs" />
     <Compile Include="Media\Geometry.cs" />
-    <Compile Include="Media\GlyphGeometry.cs" />
-    <Compile Include="Media\GlyphRun.cs" />
     <Compile Include="Media\GradientBrush.cs" />
     <Compile Include="Media\ImageBrush.cs" />
     <Compile Include="Media\Imaging\BitmapImage.cs" />
-    <Compile Include="Media\Interop\Imaging.cs" />
     <Compile Include="Media\Pen.cs" />
     <Compile Include="Media\RectangleGeometry.cs" />
     <Compile Include="Media\SolidColorBrush.cs" />
@@ -108,11 +99,10 @@
     <Compile Include="Threading\DispatcherPriority.cs" />
     <Compile Include="Threading\DispatcherProcessingDisabled.cs" />
     <Compile Include="Vector.cs" />
-    <Compile Include="Window.cs" />
-    <Compile Include="WindowForm.cs" />
+    <Compile Include="Threading\ThreadStatic.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OpenGLES\OpenGLES.csproj">
+    <ProjectReference Include="..\..\OpenGLES\OpenGLES.csproj">
       <Project>{EF70FB24-4CF9-4C2D-87AB-418FD0F75A5C}</Project>
       <Name>OpenGLES</Name>
     </ProjectReference>
@@ -134,9 +124,9 @@
     <Compile Include="Media\Animation\Timeline.cs" />
     <Compile Include="Media\Media.CodeGeneration.cs" />
     <Compile Include="Threading\DispatcherTimer.cs" />
-    <Compile Include="Threading\ThreadStatic.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}">
@@ -151,4 +141,14 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <None Include="Window.cs" />
+    <None Include="WindowForm.cs" />
+    <None Include="Application.cs" />
+    <None Include="Media\Font.cs" />
+    <None Include="Controls\Label.cs" />
+    <None Include="Media\GlyphGeometry.cs" />
+    <None Include="Media\GlyphRun.cs" />
+    <None Include="Media\Interop\Imaging.cs" />
+  </ItemGroup>
 </Project>

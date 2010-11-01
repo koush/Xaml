@@ -12,6 +12,7 @@ namespace System.Windows.Media
     /// </summary>
     public class DrawingContext
     {
+        /*
         unsafe public void DrawGlyphRun(Brush brush, GlyphRun run)
         {
             gl.PushMatrix();
@@ -39,6 +40,7 @@ namespace System.Windows.Media
 
             gl.PopMatrix();
         }
+        */
 
         public void Pop()
         {

@@ -45,12 +45,14 @@ namespace System.Windows.Controls
             // find the window to invalidate it
             while (control != null)
             {
+                /*
                 Window window = control as Window;
                 if (window != null)
                 {
                     window.myForm.Invalidate();
                     break;
                 }
+                */
                 control = control.Parent;
             }
         }
@@ -119,9 +121,11 @@ namespace System.Windows.Controls
                 control = control.Parent;
             }
 
+            /*
             Window window = last as Window;
             if (window != null)
                 window.myForm.Invalidate();
+            */
         }
 
         Size myLastConstraint = Size.Empty;

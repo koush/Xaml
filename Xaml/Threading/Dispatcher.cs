@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading;
 using System.Runtime.InteropServices;
 
+using Handler = android.os.Handler;
+
 namespace System.Windows.Threading
 {
     public class Dispatcher
@@ -15,14 +17,6 @@ namespace System.Windows.Threading
 
 #if PocketPC || Smartphone
         const string MessageDll = "coredll";
-#endif
-
-        enum DispatcherMessageParam : int
-        {
-            Invoke = 5000
-        }
-
-        const int DispatcherMessage = 34534;
 
         [DllImport(MessageDll)]
         extern static int GetMessage(IntPtr msg, IntPtr hwnd, uint filterMax, uint filterMin);
@@ -35,6 +29,15 @@ namespace System.Windows.Threading
 
         [DllImport(MessageDll)]
         extern static bool PostThreadMessage(int threadId, int Msg, int wParam, int lParam);
+
+#endif
+
+        enum DispatcherMessageParam : int
+        {
+            Invoke = 5000
+        }
+
+        const int DispatcherMessage = 34534;
 
         bool myHasShutdownStarted = false;
 
@@ -74,7 +77,8 @@ namespace System.Windows.Threading
 
         void PostDispatcherMessage(DispatcherMessageParam message)
         {
-            PostThreadMessage(myThread.ManagedThreadId, DispatcherMessage, (int)message, 0);
+            //PostThreadMessage(myThread.ManagedThreadId, DispatcherMessage, (int)message, 0);
+            throw new InvalidOperationException();
         }
 
         public Thread Thread
@@ -86,6 +90,7 @@ namespace System.Windows.Threading
         {
         }
 
+        static Dictionary<Thread, Dispatcher> myDispatchers = new Dictionary<Thread, Dispatcher>();
         public static Dispatcher FromThread(Thread thread)
         {
             return ThreadStatic<Dispatcher>.GetThreadStatic(thread);
@@ -214,6 +219,8 @@ namespace System.Windows.Threading
         int myFrameCount = 0;
         internal void PushFrameInternal(DispatcherFrame frame)
         {
+            throw new InvalidOperationException();
+            /*
             System.Diagnostics.Debug.Assert(frame.Dispatcher == this);
             if (myHasShutdownFinished)
                 throw new InvalidOperationException("The Dispatcher has finished shutting down."); 
@@ -269,6 +276,7 @@ namespace System.Windows.Threading
                 if (ShutdownFinished != null)
                     ShutdownFinished(this, EventArgs.Empty);
             }
+            */
         }
 
         internal bool myExitAllFrames = false;

@@ -1,21 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Forms;
+using System.Xml.Serialization;
+using System.IO;
+using System.Text;
 
 namespace DependencyObjectCodeGenerator
 {
     static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GeneratorForm());
+                XmlSerializer ser = new XmlSerializer(typeof(DependencyObjectNamespace));
+                using (FileStream f = new FileStream("/Users/koush/src/Xaml/Xaml/Controls/Controls.xml", FileMode.Open, FileAccess.Read))
+                {
+                    StringBuilder builder = new StringBuilder();
+                    DependencyObjectNamespace ns = ser.Deserialize(f) as DependencyObjectNamespace;
+
+                    ns.Write(builder);
+
+                    Console.WriteLine(builder.ToString());
+                }
         }
     }
 }
