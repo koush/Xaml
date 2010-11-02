@@ -100,12 +100,8 @@
     <Compile Include="Threading\DispatcherProcessingDisabled.cs" />
     <Compile Include="Vector.cs" />
     <Compile Include="Threading\ThreadStatic.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\OpenGLES\OpenGLES.csproj">
-      <Project>{EF70FB24-4CF9-4C2D-87AB-418FD0F75A5C}</Project>
-      <Name>OpenGLES</Name>
-    </ProjectReference>
+    <Compile Include="Window.cs" />
+    <Compile Include="WindowActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Controls\Controls.xml" />
@@ -142,7 +138,6 @@
   </Target>
   -->
   <ItemGroup>
-    <None Include="Window.cs" />
     <None Include="WindowForm.cs" />
     <None Include="Application.cs" />
     <None Include="Media\Font.cs" />
@@ -150,5 +145,11 @@
     <None Include="Media\GlyphGeometry.cs" />
     <None Include="Media\GlyphRun.cs" />
     <None Include="Media\Interop\Imaging.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\OpenGLES\OpenGLES.csproj">
+      <Project>{EF70FB24-4CF9-4C2D-87AB-418FD0F75A5C}</Project>
+      <Name>OpenGLES</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

@@ -10,32 +10,6 @@ namespace System.Windows
 {
     public partial class Window
     {
-        void OnPaint()
-        {
-            if (!IsMeasureValid)
-            {
-                //Control content = Content as Control;
-                //if (content != null && !content.IsMeasureValid)
-                //{
-                //    content.Measure(new Size(myForm.ClientSize.Width, myForm.ClientSize.Height));
-                //    content.Arrange(new Rect(0, 0, myForm.ClientSize.Width, myForm.ClientSize.Height));
-                //}
-                Measure(new Size(myForm.ClientSize.Width, myForm.ClientSize.Height));
-            }
-
-            gl.Clear(gl.GL_COLOR_BUFFER_BIT);
-
-            gl.MatrixMode(gl.GL_PROJECTION);
-            gl.LoadIdentity();
-            gl.Orthof(0, myForm.ClientSize.Width, myForm.ClientSize.Height, 0, -10, 10);
-
-            gl.MatrixMode(gl.GL_MODELVIEW);
-            gl.LoadIdentity();
-
-            Render(this, myDrawingContext);
-            egl.SwapBuffers(myDisplay, mySurface);
-        }
-
         internal class WindowForm : System.Windows.Forms.Form
         {
             public Window myWindow;
