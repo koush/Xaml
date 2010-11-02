@@ -9,6 +9,7 @@ using System.Windows.Media;
 using android.opengl;
 using System.Windows;
 using system.windows;
+using System.Windows.Threading;
 
 namespace system.windows
 {
@@ -21,6 +22,8 @@ namespace system.windows
         
         public void onSurfaceCreated (javax.microedition.khronos.opengles.GL10 arg0, javax.microedition.khronos.egl.EGLConfig arg1)
         {
+            Console.WriteLine(System.Threading.Thread.CurrentThread.ManagedThreadId);
+            Dispatcher.CreateDispatcherForGLThread(myWindow.SurfaceView);
             gl.ClearColor(myWindow.BackBrush.ScR, myWindow.BackBrush.ScG, myWindow.BackBrush.ScB, myWindow.BackBrush.ScA);
             gl.ShadeModel(gl.GL_SMOOTH);
             gl.ClearDepthf(1.0f);

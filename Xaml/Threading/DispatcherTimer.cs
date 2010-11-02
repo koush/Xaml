@@ -11,13 +11,11 @@ namespace System.Windows.Threading
         //Timer myTimer = new Timer();
 
         TimeSpan myTimeSpan;
-        DispatcherPriority myPriority;
         Dispatcher myDispatcher;
         bool myEnabled = true;
-        public DispatcherTimer(TimeSpan timeSpan, DispatcherPriority priority, EventHandler handler, Dispatcher dispatcher)
+        public DispatcherTimer(TimeSpan timeSpan, EventHandler handler, Dispatcher dispatcher)
         {
             myTimeSpan = timeSpan;
-            myPriority = priority;
             myDispatcher = dispatcher;
             Tick += handler;
             //myTimer.Tick += new EventHandler(myTimer_Tick);
@@ -26,7 +24,7 @@ namespace System.Windows.Threading
         void myTimer_Tick(object sender, EventArgs e)
         {
             //myTimer.Enabled = false;
-            myDispatcher.BeginInvoke(myPriority, new EmptyDelegate(FireTick));
+            myDispatcher.BeginInvoke(new EmptyDelegate(FireTick));
         }
         
         public void Start()

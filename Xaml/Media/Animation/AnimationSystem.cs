@@ -59,7 +59,7 @@ namespace System.Windows.Media.Animation
 
         private AnimationSystem()
         {
-            myTimer = new DispatcherTimer(TimeSpan.FromMilliseconds(40), DispatcherPriority.Send, TimerHandler, Dispatcher.CurrentDispatcher);
+            myTimer = new DispatcherTimer(TimeSpan.FromMilliseconds(40), TimerHandler, Dispatcher.CurrentDispatcher);
         }
 
         static AnimationSystem Create()

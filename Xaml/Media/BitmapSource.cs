@@ -200,6 +200,45 @@ namespace System.Windows.Media
             return ret;
         }
 
+        unsafe public static BitmapSource Create(android.content.Context context, int resourceId)
+        {
+            return null;
+            /*
+            uint tex;
+            gl.GenTextures(1, &tex);
+            ret.myName = tex;
+
+            gl.BindTexture(gl.GL_TEXTURE_2D, ret.myName);
+
+         // do stuff to load it
+         var inputStream = context.getResources().openRawResource(resource);
+            try
+            {
+                var bitmap = BitmapFactory.decodeStream(inputStream);
+                ret.myWidth = bitmap.Width;
+                ret.myHeight = bitmap.Height;
+                GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0);
+            }
+            finally
+            {
+                inputStream.close();
+            }
+
+            gl.TexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_MIN_FILTER, gl.GL_LINEAR);
+            gl.TexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_MAG_FILTER, gl.GL_LINEAR);
+
+            ret.myPositionCoords = new float[] 
+            { 
+                0, -ret.Height, 0, 
+                0, 0, 0, 
+                ret.myWidth, -ret.myHeight, 0, 
+                ret.myWidth, 0, 0 
+            };
+
+            return ret;
+            */
+        }
+
         unsafe public static BitmapSource Create(int width, int height, PixelFormat pixelFormat, byte[] pixels)
         {
             fixed (byte* pixelPointer = pixels)

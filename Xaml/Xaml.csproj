@@ -45,6 +45,7 @@
     <FileAlignment>512</FileAlignment>
     <WarningLevel>4</WarningLevel>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
@@ -92,12 +93,9 @@
     <Compile Include="Size.cs" />
     <Compile Include="Thickness.cs" />
     <Compile Include="Threading\Dispatcher.cs" />
-    <Compile Include="Threading\DispatcherFrame.cs" />
     <Compile Include="Threading\DispatcherObject.cs" />
     <Compile Include="Threading\DispatcherOperation.cs" />
     <Compile Include="Threading\DispatcherOperationStatus.cs" />
-    <Compile Include="Threading\DispatcherPriority.cs" />
-    <Compile Include="Threading\DispatcherProcessingDisabled.cs" />
     <Compile Include="Vector.cs" />
     <Compile Include="Threading\ThreadStatic.cs" />
     <Compile Include="Window.cs" />
@@ -138,7 +136,6 @@
   </Target>
   -->
   <ItemGroup>
-    <None Include="WindowForm.cs" />
     <None Include="Application.cs" />
     <None Include="Media\Font.cs" />
     <None Include="Controls\Label.cs" />

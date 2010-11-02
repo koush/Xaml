@@ -9,11 +9,10 @@ namespace System.Windows.Threading
 {
     public class DispatcherOperation
     {
-        internal DispatcherOperation(Dispatcher dispatcher, Delegate del, DispatcherPriority priority, object[] args)
+        internal DispatcherOperation(Dispatcher dispatcher, Delegate del, object[] args)
         {
             myDispatcher = dispatcher;
             myDelegate = del;
-            myPriority = priority;
             myArgs = args;
         }
 
@@ -25,13 +24,18 @@ namespace System.Windows.Threading
 
         Delegate myDelegate;
         object[] myArgs;
-        DispatcherPriority myPriority;
         ManualResetEvent myEvent;
         internal DispatcherOperationStatus myStatus = DispatcherOperationStatus.Pending;
 
         internal void Invoke()
         {
-            System.Diagnostics.Debug.Assert(myStatus == DispatcherOperationStatus.Executing);
+            lock (this)
+            {
+                // It can be complete if it ends up the handler and wait is later called.
+                if (myStatus == DispatcherOperationStatus.Completed)
+                    return;
+                myStatus = DispatcherOperationStatus.Executing;
+            }
             try
             {
                 myResult = myDelegate.Method.Invoke(myDelegate.Target, myArgs);
@@ -53,17 +57,19 @@ namespace System.Windows.Threading
                 myEvent.Set();
                 Thread.Sleep(0);
             }
-            if (myFrame != null)
-                myFrame.Continue = false;
         }
 
-        DispatcherFrame myFrame;
         public DispatcherOperationStatus Wait()
         {
             if (Dispatcher.FromThread(Thread.CurrentThread) == myDispatcher)
             {
-                myFrame = new DispatcherFrame();
-                myDispatcher.PushFrameInternal(myFrame);
+                lock (this)
+                {
+                    System.Diagnostics.Debug.Assert(myStatus != DispatcherOperationStatus.Executing);
+                    if (myStatus == DispatcherOperationStatus.Completed)
+                        return myStatus;
+                }
+                Invoke();
             }
             else
             {
@@ -91,35 +97,7 @@ namespace System.Windows.Threading
         {
             get { return myResult; }
         }
-
-        public DispatcherPriority Priority
-        {
-            get { return myPriority; }
-            set
-            {
-                lock (this)
-                {
-                    if (myPriority == value)
-                        return;
-                    if (myStatus != DispatcherOperationStatus.Pending)
-                        throw new InvalidOperationException("This operation is already running.");
-                    if (!myDispatcher.SetPriority(this, value))
-                        throw new InvalidOperationException("This operation is already running.");
-                }
-            }
-        }
-
-        public bool Abort()
-        {
-            lock (this)
-            {
-                if (myDispatcher.Abort(this))
-                {
-                    NotifyInvokeComplete();
-                    return true;
-                }
-            }
-            return false;
-        }
     }
+
+    public delegate void EmptyDelegate();
 }
