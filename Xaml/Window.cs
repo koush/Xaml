@@ -9,21 +9,22 @@ using System.Windows.Media;
 using android.content;
 using System.Windows;
 using system.windows;
+using System.Windows.Threading;
 
 namespace System.Windows
 {
     public partial class Window : ContentControl
     {
         static List<Window> myWindows = new List<Window>();
-        
+        internal static Dispatcher myGLDispatcher;
+  
         public Window(WindowActivity activity)
         {
-            myWindows.Add(this);
             WindowActivity = activity;
-
-            WindowActivity.myWindow = this;
-            SurfaceView = new android.opengl.GLSurfaceView(WindowActivity);
-            SurfaceView.setRenderer(WindowActivity);
+        }
+        
+        protected virtual void OnCreate()
+        {
         }
 
         public void Show()
@@ -76,14 +77,21 @@ namespace System.Windows
                 //    content.Measure(new Size(myForm.ClientSize.Width, myForm.ClientSize.Height));
                 //    content.Arrange(new Rect(0, 0, myForm.ClientSize.Width, myForm.ClientSize.Height));
                 //}
-                Measure(new Size(ClientWidth, ClientHeight));
+                Measure(new Size(WindowActivity.ClientWidth, WindowActivity.ClientHeight));
             }
+
+            gl.ClearColor(BackBrush.ScR, BackBrush.ScG, BackBrush.ScB, BackBrush.ScA);
+            gl.ShadeModel(gl.GL_SMOOTH);
+            gl.ClearDepthf(1.0f);
+            gl.BlendFunc(gl.GL_SRC_ALPHA, gl.GL_ONE_MINUS_SRC_ALPHA);
+            gl.DepthFunc(gl.GL_LEQUAL);
+            gl.Hint(gl.GL_PERSPECTIVE_CORRECTION_HINT, gl.GL_NICEST);
 
             gl.Clear(gl.GL_COLOR_BUFFER_BIT);
 
             gl.MatrixMode(gl.GL_PROJECTION);
             gl.LoadIdentity();
-            gl.Orthof(0, ClientWidth, ClientHeight, 0, -10, 10);
+            gl.Orthof(0, WindowActivity.ClientWidth, WindowActivity.ClientHeight, 0, -10, 10);
 
             gl.MatrixMode(gl.GL_MODELVIEW);
             gl.LoadIdentity();

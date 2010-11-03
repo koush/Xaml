@@ -22,25 +22,15 @@ namespace System.Windows.Threading
             get { return myThread; }
         }
 
-        internal Action<DispatcherOperation> mySendDelegate;
         internal Action<DispatcherOperation> myPostDelegate;
         internal Dispatcher()
         {
             Handler handler = new Handler();
             myPostDelegate = d => handler.post(() => d.Invoke());
-            mySendDelegate = d =>
-            {
-                Message message = Message.obtain(handler, () =>
-                {
-                    d.Invoke();
-                });
-                handler.dispatchMessage(message);
-            };
         }
 
         internal Dispatcher(Action<DispatcherOperation> postDelegate, Action<DispatcherOperation> sendDelegate)
         {
-            mySendDelegate = sendDelegate;
             myPostDelegate = postDelegate;
         }
 
@@ -57,20 +47,13 @@ namespace System.Windows.Threading
             }
         }
 
-        internal static Dispatcher CreateDispatcherForGLThread(GLSurfaceView view)
+        internal static Dispatcher CreateCustomDispatcher()
         {
             var thread = Thread.CurrentThread;
             var ret = ThreadStatic<Dispatcher>.GetThreadStatic(thread);
             if (ret != null)
                 throw new InvalidOperationException("Dispatcher has already been created for this thread.");
             ret = ThreadStatic<Dispatcher>.GetOrCreateThreadStatic(() => new Dispatcher(null, null));
-            ret.myPostDelegate = d =>
-            {
-                view.queueEvent(() =>
-                {
-                    d.Invoke();
-                });
-            };
             return ret;
         }
 

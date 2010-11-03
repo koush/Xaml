@@ -41,5 +41,10 @@ namespace System.Windows
         }
 
         public static readonly Point Empty = new Point(0, 0);
+        
+        public override string ToString ()
+        {
+            return string.Format ("[Point: X={0}, Y={1}, Z={2}]", X, Y, Z);
+        }
     }
 }

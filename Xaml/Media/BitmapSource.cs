@@ -6,6 +6,7 @@ using System.Reflection;
 using System.IO;
 using System.Runtime.InteropServices;
 //using System.Windows.Media.Interop;
+using android.opengl;
 
 namespace System.Windows.Media
 {
@@ -52,7 +53,7 @@ namespace System.Windows.Media
             get { return myHeight; }
         }
 
-        internal bool myIsTransparent = false;
+        //internal bool myIsTransparent = false;
 
         public static int GetValidTextureDimensionFromSize(int size)
         {
@@ -117,32 +118,6 @@ namespace System.Windows.Media
         }
         */
 
-        // Create assumes that the contents are ready to be loaded into opengl--
-        // the dimensions are square, and it is in rgba
-        unsafe internal void Create(int squareDim, IntPtr pixelPointer, PixelFormat pixelFormat)
-        {
-            uint tex;
-            gl.GenTextures(1, &tex);
-            myName = tex;
-            myIsTransparent = pixelFormat != PixelFormat.Rgb565;
-            
-            uint glFormat = gl.GL_RGB;
-            uint glType = gl.GL_UNSIGNED_SHORT_5_6_5;
-            if (myIsTransparent)
-            {
-                glFormat = gl.GL_RGBA;
-                glType = gl.GL_UNSIGNED_BYTE;
-            }
-
-            gl.BindTexture(gl.GL_TEXTURE_2D, myName);
-            gl.TexImage2D(gl.GL_TEXTURE_2D, 0, glFormat, squareDim, squareDim, 0, glFormat, glType, pixelPointer);
-
-            gl.TexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_MIN_FILTER, gl.GL_LINEAR);
-            gl.TexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_MAG_FILTER, gl.GL_LINEAR);
-            gl.TexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_WRAP_S, gl.GL_CLAMP_TO_EDGE);
-            gl.TexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_WRAP_T, gl.GL_CLAMP_TO_EDGE);
-        }
-
         unsafe internal static BitmapSource Create(int width, int height, PixelFormat pixelFormat, IntPtr pixelPointer, bool isReadOnly)
         {
             BitmapSource ret = new BitmapSource();
@@ -202,41 +177,33 @@ namespace System.Windows.Media
 
         unsafe public static BitmapSource Create(android.content.Context context, int resourceId)
         {
-            return null;
-            /*
-            uint tex;
-            gl.GenTextures(1, &tex);
-            ret.myName = tex;
-
-            gl.BindTexture(gl.GL_TEXTURE_2D, ret.myName);
-
-         // do stuff to load it
-         var inputStream = context.getResources().openRawResource(resource);
-            try
+            BitmapSource ret = new BitmapSource();
+            Window.myGLDispatcher.Invoke(new Action(() =>
             {
-                var bitmap = BitmapFactory.decodeStream(inputStream);
-                ret.myWidth = bitmap.Width;
-                ret.myHeight = bitmap.Height;
-                GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0);
-            }
-            finally
-            {
-                inputStream.close();
-            }
-
-            gl.TexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_MIN_FILTER, gl.GL_LINEAR);
-            gl.TexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_MAG_FILTER, gl.GL_LINEAR);
-
-            ret.myPositionCoords = new float[] 
-            { 
-                0, -ret.Height, 0, 
-                0, 0, 0, 
-                ret.myWidth, -ret.myHeight, 0, 
-                ret.myWidth, 0, 0 
-            };
-
+                uint tex;
+                gl.GenTextures(1, &tex);
+                ret.myName = tex;
+                gl.BindTexture(gl.GL_TEXTURE_2D, tex);
+    
+                // do stuff to load it
+                var inputStream = context.getResources().openRawResource(resourceId);
+                try
+                {
+                    var bitmap = android.graphics.BitmapFactory.decodeStream(inputStream);
+                    ret.myWidth = bitmap.Width;
+                    ret.myHeight = bitmap.Height;
+                    GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0);
+                }
+                finally
+                {
+                    inputStream.close();
+                }
+    
+                gl.TexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_MIN_FILTER, gl.GL_LINEAR);
+                gl.TexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_MAG_FILTER, gl.GL_LINEAR);
+            }));
+    
             return ret;
-            */
         }
 
         unsafe public static BitmapSource Create(int width, int height, PixelFormat pixelFormat, byte[] pixels)

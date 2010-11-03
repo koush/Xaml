@@ -33,6 +33,11 @@ namespace System.Windows
                 return this == Empty;
             }
         }
+        
+        public override string ToString ()
+        {
+            return string.Format ("[Size: Width={0}, Height={1}, IsEmpty={2}]", Width, Height, IsEmpty);
+        }
 
         public static bool operator !=(Size first, Size second)
         {
