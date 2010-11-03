@@ -111,16 +111,18 @@ namespace System.Windows.Controls
 
         public void InvalidateMeasure()
         {
-            Control last = null;
-            Control control = this;
-            // invalidate all measures in the tree until 
-            while (control != null && control.IsMeasureValid)
+            Window.myGLDispatcher.BeginInvoke(new Action(() =>
             {
-                control.myIsMeasureValid = false;
-                last = control;
-                control = control.Parent;
-            }
-
+                Control last = null;
+                Control control = this;
+                // invalidate all measures in the tree until 
+                while (control != null && control.IsMeasureValid)
+                {
+                    control.myIsMeasureValid = false;
+                    last = control;
+                    control = control.Parent;
+                }
+            }));
             /*
             Window window = last as Window;
             if (window != null)

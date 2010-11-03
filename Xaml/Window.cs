@@ -71,13 +71,7 @@ namespace System.Windows
         {
             if (!IsMeasureValid)
             {
-                //Control content = Content as Control;
-                //if (content != null && !content.IsMeasureValid)
-                //{
-                //    content.Measure(new Size(myForm.ClientSize.Width, myForm.ClientSize.Height));
-                //    content.Arrange(new Rect(0, 0, myForm.ClientSize.Width, myForm.ClientSize.Height));
-                //}
-                Measure(new Size(WindowActivity.ClientWidth, WindowActivity.ClientHeight));
+                 Measure(new Size(WindowActivity.ClientWidth, WindowActivity.ClientHeight));
             }
 
             gl.ClearColor(BackBrush.ScR, BackBrush.ScG, BackBrush.ScB, BackBrush.ScA);

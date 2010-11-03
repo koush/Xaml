@@ -100,6 +100,7 @@
     <Compile Include="Threading\ThreadStatic.cs" />
     <Compile Include="Window.cs" />
     <Compile Include="WindowActivity.cs" />
+    <Compile Include="Threading\DispatcherTimer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Controls\Controls.xml" />
@@ -117,7 +118,6 @@
     <Compile Include="Media\Animation\RepeatBehavior.cs" />
     <Compile Include="Media\Animation\Timeline.cs" />
     <Compile Include="Media\Media.CodeGeneration.cs" />
-    <Compile Include="Threading\DispatcherTimer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -178,6 +178,18 @@ namespace System.Windows.Media
         unsafe public static BitmapSource Create(android.content.Context context, int resourceId)
         {
             BitmapSource ret = new BitmapSource();
+            var inputStream = context.getResources().openRawResource(resourceId);
+            android.graphics.Bitmap bitmap;
+            try
+            {
+                bitmap = android.graphics.BitmapFactory.decodeStream(inputStream);
+            }
+            finally
+            {
+                inputStream.close();
+            }
+            ret.myWidth = bitmap.Width;
+            ret.myHeight = bitmap.Height;
             Window.myGLDispatcher.Invoke(new Action(() =>
             {
                 uint tex;
@@ -185,20 +197,8 @@ namespace System.Windows.Media
                 ret.myName = tex;
                 gl.BindTexture(gl.GL_TEXTURE_2D, tex);
     
-                // do stuff to load it
-                var inputStream = context.getResources().openRawResource(resourceId);
-                try
-                {
-                    var bitmap = android.graphics.BitmapFactory.decodeStream(inputStream);
-                    ret.myWidth = bitmap.Width;
-                    ret.myHeight = bitmap.Height;
-                    GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0);
-                }
-                finally
-                {
-                    inputStream.close();
-                }
-    
+                GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0);
+
                 gl.TexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_MIN_FILTER, gl.GL_LINEAR);
                 gl.TexParameteri(gl.GL_TEXTURE_2D, gl.GL_TEXTURE_MAG_FILTER, gl.GL_LINEAR);
             }));
