@@ -44,7 +44,7 @@ namespace System.Windows.Media
             Rect = rectangle;
         }
 
-        public override int VerticesPerPrimitive
+        internal override int VerticesPerPrimitive
         {
             get
             {
@@ -52,7 +52,7 @@ namespace System.Windows.Media
             }
         }
 
-        public override GeometryType GeometryType
+        internal override GeometryType GeometryType
         {
             get
             {
@@ -60,7 +60,7 @@ namespace System.Windows.Media
             }
         }
 
-        public override Rect BoundingBox
+        internal override Rect BoundingBox
         {
             get
             {

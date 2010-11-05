@@ -35,6 +35,12 @@ namespace System.Windows
         public void Hide()
         {
             //myForm.Hide();
+        }        
+        
+        internal void Invalidate()
+        {
+            if (WindowActivity != null)
+                WindowActivity.Invalidate();
         }
 
         protected virtual void OnClosed(EventArgs e)
@@ -66,9 +72,12 @@ namespace System.Windows
         {
             gl.Clear(gl.GL_COLOR_BUFFER_BIT);
         }
-
+  
+        int mFrames = 0;
+        int start = Environment.TickCount;
         internal void OnPaint()
         {
+            mFrames++;
             if (!IsMeasureValid)
             {
                  Measure(new Size(WindowActivity.ClientWidth, WindowActivity.ClientHeight));
@@ -91,6 +100,9 @@ namespace System.Windows
             gl.LoadIdentity();
 
             Render(this, myDrawingContext);
+            
+            float fps = mFrames / ((Environment.TickCount - start) / 1000f);
+            Console.WriteLine(fps);
         }
 
         public event EventHandler Closed;

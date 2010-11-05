@@ -57,6 +57,7 @@
     <Reference Include="MonoJavaBridge, Version=1.0.0.0, Culture=neutral">
       <Package>android</Package>
     </Reference>
+    <Reference Include="Mono.Simd" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\ControlCollection.cs" />

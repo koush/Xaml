@@ -28,7 +28,6 @@ namespace system.windows.threading
             global::MonoJavaBridge.JniLocalHandle handle = @__env.NewObject(staticClass, constructor);
             Init(@__env, handle);
             MonoJavaBridge.JavaBridge.SetGCHandle(@__env, this);
-            Console.WriteLine(Class.Name);
         }
 
         DispatcherTimer myTimer;

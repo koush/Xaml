@@ -16,29 +16,29 @@ namespace System.Windows.Media
 
     public abstract class Geometry
     {
-        public Point[] Points
+        internal Point[] Points
         {
             get;
             set;
         }
 
-        public short[] Indices
+        internal short[] Indices
         {
             get;
             set;
         }
 
-        public abstract int VerticesPerPrimitive
+        internal abstract int VerticesPerPrimitive
         {
             get;
         }
 
-        public abstract GeometryType GeometryType
+        internal abstract GeometryType GeometryType
         {
             get;
         }
 
-        public abstract Rect BoundingBox
+        internal abstract Rect BoundingBox
         {
             get;
         }

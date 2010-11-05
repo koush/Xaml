@@ -45,14 +45,12 @@ namespace System.Windows.Controls
             // find the window to invalidate it
             while (control != null)
             {
-                /*
                 Window window = control as Window;
                 if (window != null)
                 {
-                    window.myForm.Invalidate();
+                    window.Invalidate();
                     break;
                 }
-                */
                 control = control.Parent;
             }
         }
@@ -276,7 +274,7 @@ namespace System.Windows.Controls
             DependencyPropertyFlags flags = e.Property.Flags;
             if ((flags & DependencyPropertyFlags.AffectsMeasure) == DependencyPropertyFlags.AffectsMeasure)
                 InvalidateMeasure();
-            else if ((flags & DependencyPropertyFlags.AffectsVisual) == DependencyPropertyFlags.AffectsVisual)
+            if ((flags & DependencyPropertyFlags.AffectsVisual) == DependencyPropertyFlags.AffectsVisual)
                 InvalidateVisual();
             base.OnPropertyChanged(e);
         }

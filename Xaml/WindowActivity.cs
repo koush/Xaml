@@ -26,7 +26,12 @@ namespace system.windows
         {
         }
         
-        GLSurfaceView mySurfaceView;
+        internal void Invalidate()
+        {
+            mySurfaceView.requestRender();
+        }
+        
+        internal GLSurfaceView mySurfaceView;
         protected override void onCreate (android.os.Bundle arg0)
         {
             base.onCreate (arg0);
@@ -35,12 +40,12 @@ namespace system.windows
             
             mySurfaceView = new GLSurfaceView(this);
             mySurfaceView.setRenderer(this);
+            mySurfaceView.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
             setContentView(mySurfaceView);
         }
         
         public void onSurfaceCreated (javax.microedition.khronos.opengles.GL10 arg0, javax.microedition.khronos.egl.EGLConfig arg1)
         {
-            Console.WriteLine(System.Threading.Thread.CurrentThread.ManagedThreadId);
             var dispatcher = Dispatcher.CreateCustomDispatcher();
             System.Windows.Window.myGLDispatcher = dispatcher;
             dispatcher.myPostDelegate = d =>
@@ -55,6 +60,7 @@ namespace system.windows
             {
                 var constructor = WindowType.GetConstructor(new Type[]{ typeof(WindowActivity) });
                 var window = constructor.Invoke(new object[] { this }) as Window;
+                window.WindowActivity = this;
                 myWindow = window;
             }));
         }
@@ -87,11 +93,6 @@ namespace System.Windows
 {
     public partial class Window
     {
-        public GLSurfaceView SurfaceView
-        {
-            get;set;
-        }
-        
         public WindowActivity WindowActivity
         {
             get;set;
