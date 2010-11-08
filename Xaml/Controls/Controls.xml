@@ -45,6 +45,25 @@
     </DependencyProperty>
   </DependencyObject>
   <DependencyObject>
+    <Name>WrapPanel</Name>
+    <DependencyProperty>
+      <Name>Orientation</Name>
+      <Type>Orientation</Type>
+      <DefaultValue>Orientation.Vertical</DefaultValue>
+    </DependencyProperty>
+    <DependencyProperty>
+      <Name>ItemWidth</Name>
+      <Type>float</Type>
+      <DefaultValue>float.NaN</DefaultValue>
+    </DependencyProperty>
+    <DependencyProperty>
+      <Name>ItemHeight</Name>
+      <Type>float</Type>
+      <DefaultValue>float.NaN</DefaultValue>
+    </DependencyProperty>
+  </DependencyObject>
+	<!--
+  <DependencyObject>
     <Name>Label</Name>
     <DependencyProperty>
       <Name>Font</Name>
@@ -63,4 +82,5 @@
       <Flags>AffectsVisual</Flags>
     </DependencyProperty>
   </DependencyObject>
+	-->
 </DependencyObjectNamespace>

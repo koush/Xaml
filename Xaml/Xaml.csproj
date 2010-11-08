@@ -102,6 +102,7 @@
     <Compile Include="Window.cs" />
     <Compile Include="WindowActivity.cs" />
     <Compile Include="Threading\DispatcherTimer.cs" />
+    <Compile Include="Controls\WrapPanel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Controls\Controls.xml" />

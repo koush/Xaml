@@ -19,6 +19,7 @@ namespace System.Windows.Controls
         public abstract Size SetSecondarySize(Size size, float value);
         public abstract float GetPrimaryLocation(Rect rect);
         public abstract Rect SetPrimaryLocation(Rect rect, float value);
+        public abstract Rect SetSecondaryLocation(Rect rect, float value);
     }
 
     public class VerticalAccessor : OrientationAbstraction
@@ -53,6 +54,12 @@ namespace System.Windows.Controls
         public override Rect SetPrimaryLocation(Rect rect, float value)
         {
             rect.Y = value;
+            return rect;
+        }
+
+        public override Rect SetSecondaryLocation(Rect rect, float value)
+        {
+            rect.X = value;
             return rect;
         }
 
@@ -95,6 +102,12 @@ namespace System.Windows.Controls
         public override Rect SetPrimaryLocation(Rect rect, float value)
         {
             rect.X = value;
+            return rect;
+        }
+
+        public override Rect SetSecondaryLocation(Rect rect, float value)
+        {
+            rect.Y = value;
             return rect;
         }
 

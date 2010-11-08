@@ -102,7 +102,7 @@ namespace System.Windows
             Render(this, myDrawingContext);
             
             float fps = mFrames / ((Environment.TickCount - start) / 1000f);
-            Console.WriteLine(fps);
+            //Console.WriteLine(fps);
         }
 
         public event EventHandler Closed;

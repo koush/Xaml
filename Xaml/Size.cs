@@ -7,16 +7,18 @@ namespace System.Windows
 {
     public struct Size
     {
+        float mWidth;
         public float Width
         {
-            get;
-            set;
+            get { return mWidth; }
+            set { mWidth = value; }
         }
 
+        float mHeight;
         public float Height
         {
-            get;
-            set;
+            get { return mHeight; }
+            set { mHeight = value; }
         }
 
         public Size(float width, float height)
